@@ -1,7 +1,7 @@
 Twitter Pic
 ===========
 
-Расширение для показа фотографий сервиса Instagram в Twitter-ленте.
+Chrome-расширение для показа фотографий сервиса Instagram в Twitter-ленте.
 
 License
 =======
