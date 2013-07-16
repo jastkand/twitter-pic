@@ -7,18 +7,18 @@
                     linkArray = linkRegexp.exec($(this).html());
 
                 if (linkArray != null) {
-                    var link = linkArray[0];
+                    var link = 'http://api.instagram.com/oembed?url='+linkArray[0];
 
                     $.ajax({
                         method: 'GET',
                         url: link,
-                        dataType: 'html',
+                        dataType: 'json',
                         success: function(data) {
-                            var imageLinkRegexp = /<meta property="og:image" content="(.+)" \/>/g,
-                                src = imageLinkRegexp.exec(data)[1];
+                            var response = JSON.parse(data)
+                            pic_url = response.url;
 
-                            if (src && $this.find('.picified').length == 0) {
-                                $this.append($('<img />', {src: src, class: 'picified', style: 'width: 375px; height: 375px;'}));
+                            if (pic_url && $this.find('.picified').length == 0) {
+                                $this.append($('<img />', {src: pic_url, class: 'picified', style: 'width: 375px; height: 375px;'}));
                             }
                         }
                     })
