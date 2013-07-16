@@ -14,11 +14,11 @@
                         url: link,
                         dataType: 'json',
                         success: function(data) {
-                            var response = JSON.parse(data)
-                            pic_url = response.url;
+                            var response = JSON.parse(data),
+                                pictureUrl = response.url;
 
-                            if (pic_url && $this.find('.picified').length == 0) {
-                                $this.append($('<img />', {src: pic_url, class: 'picified', style: 'width: 375px; height: 375px;'}));
+                            if (pictureUrl && $this.find('.picified').length == 0) {
+                                $this.append($('<img />', {src: pictureUrl, class: 'picified', style: 'width: 375px; height: 375px;'}));
                             }
                         }
                     })
