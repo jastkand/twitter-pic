@@ -14,8 +14,7 @@
                         url: link,
                         dataType: 'json',
                         success: function(data) {
-                            var response = JSON.parse(data),
-                                pictureUrl = response.url;
+                            var pictureUrl = data.url;
 
                             if (pictureUrl && $this.find('.picified').length == 0) {
                                 $this.append($('<img />', {src: pictureUrl, class: 'picified', style: 'width: 375px; height: 375px;'}));
