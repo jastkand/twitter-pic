@@ -1,14 +1,18 @@
 (function($){
     $(function(){
+        function appendImage($owner, pictureUrl) {
+            $owner.append($('<img />', {src: pictureUrl, class: 'picified', style: 'width: 375px;'}));
+        }
+
         function onObserve(){
             $('.js-tweet-text.tweet-text').each(function(){
                 var $this = $(this),
                     instagramRegexp = /(http:\/\/instagram.com\/p\/\S+\/)/g,
-                    otherRegexp = /(http\S+\.jpg|http\S+\.png|http\S+\.gif)/g, //TODO Make a beautiful regexp. Add new format.
+                    otherRegexp = /(http\S+\.jpg|http\S+\.png|http\S+\.gif)/g, //TODO: Make a beautiful regexp. Add new format.
                     linkArray = [];
 
                 //Instagram link parsing
-                linkArray = instagramRegexp.exec($(this).html())
+                linkArray = instagramRegexp.exec($(this).html());
 
                 if (linkArray != null) {
                     var link = 'http://api.instagram.com/oembed?url='+linkArray[0];
@@ -21,7 +25,7 @@
                             var pictureUrl = data.url;
 
                             if (pictureUrl && $this.find('.picified').length == 0) {
-                                $this.append($('<img />', {src: pictureUrl, class: 'picified', style: 'width: 375px; height: 375px;'}));
+                                appendImage($this, pictureUrl)
                             }
                         }
                     })
@@ -33,7 +37,7 @@
                 if (linkArray != null) {
                     var pictureUrl = linkArray[0];
                     if (pictureUrl && $this.find('.picified').length == 0) {
-                        $this.append($('<img />', {src: pictureUrl, class: 'picified', style: 'width: 375px;'}));
+                        appendImage($this, pictureUrl)
                     }
                 }
             });
