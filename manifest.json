@@ -3,7 +3,7 @@
 
     "name": "Twitter Pic",
     "description": "Показывает фотографии с сервиса Instagram в Twitter-ленте.",
-    "version": "1.0.0",
+    "version": "1.0.1",
 
     "permissions": [ "tabs" , "http://*/*", "https://*/*" ],
 
