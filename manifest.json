@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "Twitter Pic",
-    "description": "Показывает фотографии с сервиса Instagram в Twitter-ленте.",
+    "description": "Показывает изображения из ссылок в Twitter-ленте.",
     "version": "1.0.1",
 
     "permissions": [ "tabs" , "http://*/*", "https://*/*" ],
