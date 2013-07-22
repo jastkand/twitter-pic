@@ -9,7 +9,7 @@
                 var $this = $(this),
                     instagramRegexp = /(http:\/\/instagram.com\/p\/\S+\/)/gi,
                     otherRegexp = /(http\S+\.jpg|http\S+\.png|http\S+\.gif)/g, //TODO: Make a beautiful regexp. Add new format.
-                    linkArray = [];
+                    linkArray;
 
                 //Instagram link parsing
                 linkArray = instagramRegexp.exec($(this).html());
