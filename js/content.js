@@ -7,7 +7,7 @@
         function onObserve(){
             $('.js-tweet-text.tweet-text').each(function(){
                 var $this = $(this),
-                    instagramRegexp = /(http:\/\/instagram.com\/p\/\S+\/)/g,
+                    instagramRegexp = /(http:\/\/instagram.com\/p\/\S+\/)/gi,
                     otherRegexp = /(http\S+\.jpg|http\S+\.png|http\S+\.gif)/g, //TODO: Make a beautiful regexp. Add new format.
                     linkArray = [];
 
