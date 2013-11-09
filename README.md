@@ -3,6 +3,8 @@ Twitter Pic
 
 Chrome-расширение для показа изображений из ссылок в Twitter-ленте.
 
+[Chrome Web Store](https://chrome.google.com/webstore/detail/twitter-pic/pjkmloheaimoaocmlkdgdahcjklmoalm?hl=en-US)
+
 License
 =======
 
