@@ -12,37 +12,41 @@
                     blackListRegexp = /(https:\/\/abs.twimg.com\/)/gi,
                     linkArray;
 
-                //Check existing in black list
-                if (blackListRegexp.test($(this).html())) return true;
-
                 //Instagram link parsing
                 linkArray = instagramRegexp.exec($(this).html());
 
                 if (linkArray != null) {
-                    var link = 'http://api.instagram.com/oembed?url='+linkArray[0];
+                    for (var i = 0; i < linkArray.length; i++) {
+                        var link = 'http://api.instagram.com/oembed?url='+ linkArray[i];
+                        $.ajax({
+                            method: 'GET',
+                            url: link,
+                            dataType: 'json',
+                            success: function(data) {
+                                var pictureUrl = data.url;
 
-                    $.ajax({
-                        method: 'GET',
-                        url: link,
-                        dataType: 'json',
-                        success: function(data) {
-                            var pictureUrl = data.url;
-
-                            if (pictureUrl && $this.find('.picified').length == 0) {
-                                appendImage($this, pictureUrl)
+                                if (pictureUrl && $this.find('.picified').length == 0) {
+                                    appendImage($this, pictureUrl)
+                                }
                             }
-                        }
-                    })
+                        });
+                    }                   
                 }
-
+                
                 //Other picture link parsing
                 linkArray = otherRegexp.exec($(this).html());
 
                 if (linkArray != null) {
-                    var pictureUrl = linkArray[0];
-                    if (pictureUrl && $this.find('.picified').length == 0) {
-                        appendImage($this, pictureUrl)
-                    }
+                    // for (var i = 0; i < linkArray.length; i++) {
+                        var pictureUrl = linkArray[0];
+                        
+                        if (blackListRegexp.test(pictureUrl)) 
+                            return true;
+                        
+                        if (pictureUrl && $this.find('.picified').length == 0) {
+                            appendImage($this, pictureUrl)
+                        }
+                    // };
                 }
             });
         }
