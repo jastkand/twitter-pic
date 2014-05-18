@@ -27,20 +27,18 @@
 
                 //Instagram link parsing
                 if (instagramLinkArray != null) {
-                    for (var i = 0; i < instagramLinkArray.length; i++) {
-                        var link = 'https://api.instagram.com/oembed?url=' + instagramLinkArray[i];
-                        $.ajax({
-                            method: 'GET',
-                            url: link,
-                            dataType: 'json',
-                            success: function (data) {
-                                var pictureUrl = data.url;
-                                if (pictureUrl) {
-                                    appendImage($this, pictureUrl);
-                                }
+                    var link = 'https://api.instagram.com/oembed?url=' + instagramLinkArray[0];
+                    $.ajax({
+                        method: 'GET',
+                        url: link,
+                        dataType: 'json',
+                        success: function (data) {
+                            var pictureUrl = data.url;
+                            if (pictureUrl) {
+                                appendImage($this, pictureUrl);
                             }
-                        });
-                    }
+                        }
+                    });
                 }
 
                 $this.addClass('picified');
