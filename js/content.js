@@ -1,5 +1,5 @@
 (function($){
-    $(function(){
+    window.addEventListener('load', function () {
         function appendImage ($owner, pictureUrl) {
             $owner
                 .addClass('picified')
@@ -55,5 +55,5 @@
         observer.observe($('#stream-items-id')[0], { attributes: true, childList: true, characterData: true });
 
         onObserve();
-    });
+    }, false);
 })(jQuery);
