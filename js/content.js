@@ -16,9 +16,10 @@
 
                 if (allPicLinkArray != null) {
                     for (var i = 0; i < allPicLinkArray.length; i++) {
-                        var pictureUrl = allPicLinkArray[i];
+                        var pictureUrl = allPicLinkArray[i],
+                            isBlackListed = pictureUrl.match(blackListRegexp);
 
-                        if (!blackListRegexp.test(pictureUrl)) {
+                        if (!isBlackListed) {
                             appendImage($this, pictureUrl)
                         }
                     }
