@@ -1,9 +1,7 @@
 (function($){
     window.addEventListener('load', function () {
         function appendImage ($owner, pictureUrl) {
-            $owner
-                .addClass('picified')
-                .append($('<img />', {src: pictureUrl, style: 'width: 375px;'}));
+            $owner.append($('<img />', {src: pictureUrl, style: 'width: 375px;'}));
         }
 
         function onObserve () {
@@ -43,6 +41,8 @@
                         });
                     }
                 }
+
+                $this.addClass('picified');
             });
         }
 
