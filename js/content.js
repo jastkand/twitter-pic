@@ -1,57 +1,53 @@
 (function($){
     $(function(){
-        function appendImage($owner, pictureUrl) {
-            $owner.append($('<img />', {src: pictureUrl, class: 'picified', style: 'width: 375px;'}));
+        function appendImage ($owner, pictureUrl) {
+            $owner
+                .addClass('picified')
+                .append($('<img />', {src: pictureUrl, style: 'width: 375px;'}));
         }
 
-        function onObserve(){
-            $('.js-tweet-text.tweet-text').each(function(){
+        function onObserve () {
+            $('.js-tweet-text.tweet-text:not(.picified)').each(function () {
                 var $this = $(this),
                     instagramRegexp = /(http:\/\/instagram.com\/p\/\S+\/)/gi,
                     otherRegexp = /(http\S+\.jpg|http\S+\.png|http\S+\.gif)/g, //TODO: Make a beautiful regexp. Add new format.
                     blackListRegexp = /(https:\/\/abs.twimg.com\/)/gi,
                     linkArray;
 
-                //Instagram link parsing
-                linkArray = instagramRegexp.exec($(this).html());
+                var instagramLinkArray = instagramRegexp.exec($(this).html());
+                var allPicLinkArray = otherRegexp.exec($(this).html());
 
-                if (linkArray != null) {
-                    for (var i = 0; i < linkArray.length; i++) {
-                        var link = 'http://api.instagram.com/oembed?url='+ linkArray[i];
+                if (allPicLinkArray != null) {
+                    for (var i = 0; i < allPicLinkArray.length; i++) {
+                        var pictureUrl = allPicLinkArray[i];
+
+                        if (pictureUrl && !blackListRegexp.test(pictureUrl)) {
+                            appendImage($this, pictureUrl)
+                        }
+                    }
+                }
+
+                //Instagram link parsing
+                if (instagramLinkArray != null) {
+                    for (var i = 0; i < instagramLinkArray.length - 1; i++) {
+                        var link = 'https://api.instagram.com/oembed?url=' + instagramLinkArray[i];
                         $.ajax({
                             method: 'GET',
                             url: link,
                             dataType: 'json',
-                            success: function(data) {
+                            success: function (data) {
                                 var pictureUrl = data.url;
-
-                                if (pictureUrl && $this.find('.picified').length == 0) {
-                                    appendImage($this, pictureUrl)
+                                if (pictureUrl) {
+                                    appendImage($this, pictureUrl);
                                 }
                             }
                         });
-                    }                   
-                }
-                
-                //Other picture link parsing
-                linkArray = otherRegexp.exec($(this).html());
-
-                if (linkArray != null) {
-                    // for (var i = 0; i < linkArray.length; i++) {
-                        var pictureUrl = linkArray[0];
-                        
-                        if (blackListRegexp.test(pictureUrl)) 
-                            return true;
-                        
-                        if (pictureUrl && $this.find('.picified').length == 0) {
-                            appendImage($this, pictureUrl)
-                        }
-                    // };
+                    }
                 }
             });
         }
 
-        var observer = new MutationObserver(function(mutations) {
+        var observer = new MutationObserver(function (mutations) {
             setTimeout(onObserve, 500);
         });
 
