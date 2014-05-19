@@ -1,5 +1,9 @@
 (function($){
     window.addEventListener('load', function () {
+        function onlyUnique(value, index, self) {
+            return self.indexOf(value) === index;
+        }
+
         function appendImage ($owner, pictureUrl) {
             $owner.append($('<img />', {src: pictureUrl, style: 'width: 375px;'}));
         }
@@ -15,6 +19,8 @@
                 var allPicLinkArray = otherRegexp.exec($(this).html());
 
                 if (allPicLinkArray != null) {
+                    allPicLinkArray = allPicLinkArray.filter(onlyUnique);
+
                     for (var i = 0; i < allPicLinkArray.length; i++) {
                         var pictureUrl = allPicLinkArray[i],
                             isBlackListed = pictureUrl.match(blackListRegexp);
