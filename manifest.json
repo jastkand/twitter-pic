@@ -3,7 +3,7 @@
 
     "name": "Twitter Pic",
     "description": "Показывает изображения из ссылок в Twitter-ленте.",
-    "version": "1.0.3",
+    "version": "1.0.4",
 
     "permissions": [ "tabs" , "http://*/*", "https://*/*" ],
 
